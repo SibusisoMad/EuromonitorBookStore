@@ -1,2 +1,1 @@
-# EuromonitorBookStore
-Online Book Store
+# Euromonitor-Book-Store
