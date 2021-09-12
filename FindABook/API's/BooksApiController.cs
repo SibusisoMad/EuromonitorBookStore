@@ -79,7 +79,7 @@ namespace FindABook.API_s
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook([Bind("Title,Description,Price,CategoryId,BestSeller,Publisher,ImageUrl")]Book book)
         {
-         
+            
             try
             {
                 _context.Books.Add(book);

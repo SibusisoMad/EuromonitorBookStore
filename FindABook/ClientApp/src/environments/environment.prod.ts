@@ -5,10 +5,9 @@ export const environment = {
 };
 
 export const ApiRoutes = {
-  baseBookUrl: environment.baseAPIUrl+"BooksApi/",
-  loginApiUrl:environment.baseAPIUrl+"UserAuth/Login",
-  registerApiUrl:environment.baseAPIUrl+"UserAuth/Register",
-  
-  purchaseBookUrl:""
-
+  baseBookUrl:"api/BooksApi/",
+  loginApiUrl:environment.baseAPIUrl+"/UserAuth/Login",
+  registerApiUrl:environment.baseAPIUrl+"api/UserAuth/Register",
+  purchaseBookUrl:environment.baseAPIUrl+"/BookSubscriptionsApi",
+  BookSubscriptionAPI:"api/BookSubscriptionsApi"
 };

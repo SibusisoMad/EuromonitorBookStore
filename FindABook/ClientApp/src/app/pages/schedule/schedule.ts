@@ -5,6 +5,10 @@ import { AlertController, IonList, IonRouterOutlet, LoadingController, ModalCont
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+import { Book } from '../../interfaces/book';
+import { BookSubscriptionService } from '../../providers/book-subscription.service';
+import { BookSubscription } from '../../interfaces/bookSubscription';
+import { BooksService } from '../../providers/books.service';
 
 @Component({
   selector: 'page-schedule',
@@ -24,6 +28,7 @@ export class SchedulePage implements OnInit {
   groups: any = [];
   confDate: string;
   showSearchbar: boolean;
+  bookSubscriptions: BookSubscription = [];
 
   constructor(
     public alertCtrl: AlertController,
@@ -34,7 +39,9 @@ export class SchedulePage implements OnInit {
     public routerOutlet: IonRouterOutlet,
     public toastCtrl: ToastController,
     public user: UserData,
-    public config: Config
+    public config: Config,
+    public booksService:BooksService,
+    public subscriptionService:BookSubscriptionService
   ) { }
 
   ngOnInit() {
@@ -48,6 +55,14 @@ export class SchedulePage implements OnInit {
     if (this.scheduleList) {
       this.scheduleList.closeSlidingItems();
     }
+
+    this.subscriptionService.getBooks().subscribe(data=>{
+      console.log(data);
+    });
+
+    this.subscriptionService.getBooks().subscribe((data:BookSubscription[])=>{
+      this.bookSubscriptions = data;
+    });
 
     this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
       this.shownSessions = data.shownSessions;

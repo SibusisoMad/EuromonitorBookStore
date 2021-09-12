@@ -60,7 +60,7 @@ namespace FindABook.Controllers
                     var tokenDescriptor = GenerateTokenDescriptor(user, new { roles, model });
 
                     HttpContext httpContext = Response.HttpContext;
-                    return new { sucess = true, token = tokenDescriptor, userId = user.Id, contactId = _context.Users.Where(a => a.Id == user.Id).FirstOrDefault()?.Id };
+                    return new { success = true, token = tokenDescriptor, userId = user.Id, contactId = _context.Users.Where(a => a.Id == user.Id).FirstOrDefault()?.Id };
 
                 }
                 return new { message = "", success = false };

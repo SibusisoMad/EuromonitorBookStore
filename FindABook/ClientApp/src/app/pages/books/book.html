@@ -36,15 +36,15 @@
                   <p style="overflow-y: hidden;overflow-wrap: break-word !important;"><strong>Description:</strong> <br /> {{book.Description}}</p>               
                 <hr/>
                 </ion-item>
-              <ion-item detail="false" routerLink="/app/tabs/books/book-details/{{book.BookId}}">
+              <ion-item detail="false">
                 <ion-label>
                   <h3>Price: {{book.Price}}</h3>
                 </ion-label>
                 <ion-label>
-                   <ion-button>Purchase</ion-button>
+                   <ion-button (click)="subscribe(book.BookId)" >Purchase</ion-button>
                 </ion-label>
                 <ion-label>
-                  <ion-button>Like</ion-button>
+                  <ion-button (click)="subscribe(book.BookId)">Like</ion-button>
                </ion-label>
               </ion-item>
             </ion-list>

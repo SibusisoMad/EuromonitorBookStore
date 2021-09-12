@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FindABook.Models;
+using Microsoft.AspNetCore.Authorization;
+using FindABook.Models.UtillityModels;
 
 namespace FindABook.API_s
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BookSubscriptionsApi : ControllerBase
     {
         private readonly BooksDbContext _context;
@@ -24,7 +27,10 @@ namespace FindABook.API_s
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookSubscription>>> GetBookSubscriptions()
         {
-            return await _context.BookSubscriptions.ToListAsync();
+            string userId = SecurityHelper.GetUserId(HttpContext);
+            
+            return await _context.BookSubscriptions.Include(b=>b.Book).Where(a=>a.UserId==userId).ToListAsync();
+           
         }
 
         // GET: api/BookSubscriptionsApi/5
@@ -79,6 +85,9 @@ namespace FindABook.API_s
         [HttpPost]
         public async Task<ActionResult<BookSubscription>> PostBookSubscription(BookSubscription bookSubscription)
         {
+            bookSubscription.UserId=SecurityHelper.GetUserId(HttpContext);
+            bookSubscription.LastModified = DateTime.Now;
+            bookSubscription.Subscribed = true;
             _context.BookSubscriptions.Add(bookSubscription);
             await _context.SaveChangesAsync();
 

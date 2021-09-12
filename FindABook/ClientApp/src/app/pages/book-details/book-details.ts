@@ -5,6 +5,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Book } from '../../interfaces/book';
 import { BooksService } from '../../providers/books.service';
+import { BookSubscriptionService } from '../../providers/book-subscription.service';
 
 @Component({
   selector: 'page-book-detail',
@@ -19,11 +20,11 @@ export class BookDetailPage {
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
-    public bookService: BooksService
+    public bookService: BooksService,
+    public subscriptionService:BookSubscriptionService
   ) {}
 
   ionViewWillEnter() {
-
     this.bookService.getBookById(1).subscribe((data:Book)=>{
       console.log(data);
     });

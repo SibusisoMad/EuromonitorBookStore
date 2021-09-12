@@ -13,7 +13,7 @@ namespace FindABook.Models
 
         public string UserId { get; set; }
 
-       public int BookId { get; set; }
+        public int BookId { get; set; }
 
         public bool Subscribed { get; set; }
         
